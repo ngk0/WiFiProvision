@@ -34,8 +34,10 @@ jobs:
             - examples/Provision
           enable-warnings-report: true
 
+      # Cloned inside the workspace: compile-sketches resolves source-path
+      # relative to it and cannot reach a checkout somewhere else on the runner.
       - name: Fetch HilTest for the self test
-        run: git clone --depth 1 https://github.com/ngk0/arduino-hil.git /tmp/arduino-hil
+        run: git clone --depth 1 https://github.com/ngk0/arduino-hil.git .deps/arduino-hil
 
       - name: Compile the self test
         uses: arduino/compile-sketches@v1
@@ -50,7 +52,7 @@ jobs:
             - name: Adafruit GFX Library
             - name: Adafruit BusIO
             - source-path: ./
-            - source-path: /tmp/arduino-hil/HilTest
+            - source-path: ./.deps/arduino-hil/HilTest
           sketch-paths: |
             - examples/SelfTest
           enable-warnings-report: true
