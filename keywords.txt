@@ -1,0 +1,53 @@
+#######################################
+# Syntax Coloring Map For WiFiProvision
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+WiFiProvision	KEYWORD1
+WPCreds	KEYWORD1
+WPNetwork	KEYWORD1
+WPState	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+start	KEYWORD2
+scan	KEYWORD2
+clearNetworks	KEYWORD2
+addNetwork	KEYWORD2
+networkCount	KEYWORD2
+network	KEYWORD2
+select	KEYWORD2
+setPassword	KEYWORD2
+connect	KEYWORD2
+connectStored	KEYWORD2
+setConnectTimeout	KEYWORD2
+touch	KEYWORD2
+handleSerial	KEYWORD2
+justConnected	KEYWORD2
+state	KEYWORD2
+credentials	KEYWORD2
+restore	KEYWORD2
+forget	KEYWORD2
+redraw	KEYWORD2
+makeCreds	KEYWORD2
+crcOf	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+WP_IDLE	LITERAL1
+WP_PICK	LITERAL1
+WP_KEYBOARD	LITERAL1
+WP_CONNECTING	LITERAL1
+WP_CONNECTED	LITERAL1
+WP_FAILED	LITERAL1
+WP_MAX_NETWORKS	LITERAL1
+WP_SSID_LEN	LITERAL1
+WP_PASS_LEN	LITERAL1

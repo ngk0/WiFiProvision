@@ -1,0 +1,56 @@
+name: Compile Examples
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  compile:
+    name: Adafruit Feather M0
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Compile the provisioning example
+        uses: arduino/compile-sketches@v1
+        with:
+          fqbn: adafruit:samd:adafruit_feather_m0
+          platforms: |
+            - name: arduino:samd
+            - name: adafruit:samd
+              source-url: https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
+          libraries: |
+            - name: WiFi101
+            - name: Adafruit GFX Library
+            - name: Adafruit ILI9341
+            - name: Adafruit STMPE610
+            - name: Adafruit BusIO
+            - name: FlashStorage
+            - source-path: ./
+          sketch-paths: |
+            - examples/Provision
+          enable-warnings-report: true
+
+      - name: Fetch HilTest for the self test
+        run: git clone --depth 1 https://github.com/ngk0/arduino-hil.git /tmp/arduino-hil
+
+      - name: Compile the self test
+        uses: arduino/compile-sketches@v1
+        with:
+          fqbn: adafruit:samd:adafruit_feather_m0
+          platforms: |
+            - name: arduino:samd
+            - name: adafruit:samd
+              source-url: https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
+          libraries: |
+            - name: WiFi101
+            - name: Adafruit GFX Library
+            - name: Adafruit BusIO
+            - source-path: ./
+            - source-path: /tmp/arduino-hil/HilTest
+          sketch-paths: |
+            - examples/SelfTest
+          enable-warnings-report: true

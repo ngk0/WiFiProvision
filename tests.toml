@@ -1,0 +1,33 @@
+# Hardware test file for https://github.com/ngk0/arduino-hil
+#
+#   python hil.py run tests.toml
+#
+# The self test needs no radio and no touch panel: networks are injected and
+# touches are delivered as coordinates, so it checks the credential record, the
+# picker and the keyboard on a bare board.
+
+[board]
+fqbn = "adafruit:samd:adafruit_feather_m0"
+port = "auto"
+baud = 115200
+libraries = ["../WiFiProvision", "../arduino-hil/HilTest"]
+
+[[test]]
+name = "self test"
+sketch = "examples/SelfTest"
+timeout = 45
+until = "HIL RESULT"
+expect = ["HIL RESULT PASS"]
+forbid = ["HIL FAIL"]
+
+# Provisioning end to end, driven over serial. Fill in a real network before
+# running this one; it is skipped by default because it needs credentials.
+#
+# [[test]]
+# name = "provision over serial"
+# sketch = "examples/Provision"
+# timeout = 90
+# send = ["scan", "list", "pick 0", "pass YOUR_PASSWORD", "connect", "status"]
+# send_delay = 10
+# expect = ["connected", "ip "]
+# forbid = ["failed"]

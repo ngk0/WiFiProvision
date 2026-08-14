@@ -1,0 +1,10 @@
+# Build output
+build/
+*.hex
+*.bin
+*.elf
+
+# Editor / OS noise
+.vscode/
+.DS_Store
+Thumbs.db
